@@ -18,7 +18,12 @@ import profile4 from "@/assets/profile-4.jpg";
 import profile5 from "@/assets/profile-5.jpg";
 
 const profilePhotos = [profile1, profile2, profile3, profile4, profile5];
-const titles = ["Ingénieur Logiciel", "Développeur Web Full-Stack", "Architecte Web", "Créateur de Solutions Numériques"];
+const titles = [
+  "Ingénieur Logiciel",
+  "Développeur Web Full-Stack",
+  "Architecte Web",
+  "Créateur de Solutions Numériques",
+];
 
 export function Hero() {
   const [titleIndex, setTitleIndex] = useState(0);
@@ -92,7 +97,7 @@ export function Hero() {
         {techLogos.map((logo, idx) => (
           <motion.div
             key={idx}
-            className={`absolute ${logo.color}`}
+            className={`absolute ${logo.color} hidden sm:block`} // caché sur mobile
             style={{ top: logo.top, left: logo.left, bottom: logo.bottom, right: logo.right }}
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: logo.duration, repeat: Infinity, ease: "easeInOut" }}
