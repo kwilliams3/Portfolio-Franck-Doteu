@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Design System - Franck Doteu Portfolio */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* Premium Light Mode */
+    --background: 0 0% 99%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    /* Vibrant Accent Colors */
+    --primary: 250 89% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 240 10% 10%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 320 85% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 250 89% 60%;
+
+    --radius: 0.75rem;
+
+    /* Premium Custom Colors */
+    --gradient-start: 250 89% 60%;
+    --gradient-end: 320 85% 60%;
+    --glow: 250 89% 60%;
+    --glass: 0 0% 100%;
+    --glass-border: 220 13% 91%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 250 89% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 250 89% 60%;
+  }
+
+  .dark {
+    /* Premium Dark Mode */
+    --background: 240 10% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 250 89% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 6% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 6% 15%;
+    --muted-foreground: 220 9% 60%;
+
+    --accent: 320 85% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 250 89% 65%;
+
+    /* Premium Custom Colors - Dark */
+    --gradient-start: 250 89% 65%;
+    --gradient-end: 320 85% 65%;
+    --glow: 250 89% 65%;
+    --glass: 240 10% 12%;
+    --glass-border: 240 6% 25%;
+
+    /* Sidebar Dark */
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 250 89% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 6% 15%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 6% 20%;
+    --sidebar-ring: 250 89% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-foreground;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Effect */
+  .glass {
+    @apply bg-glass/80 backdrop-blur-xl border border-glass-border/50;
+  }
+
+  /* Premium Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-flow 3s ease infinite;
+  }
+
+  /* Glow Effect */
+  .glow {
+    box-shadow: 0 0 40px -10px hsl(var(--glow) / 0.5);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px -5px hsl(var(--glow) / 0.4);
+  }
+
+  /* Card Hover Effect */
+  .card-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 25px 50px -12px hsl(var(--primary) / 0.25);
+  }
+
+  /* Premium Button */
+  .btn-premium {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300;
+  }
+
+  .btn-premium::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-premium:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-premium:hover {
+    @apply scale-105;
+    box-shadow: 0 20px 40px -10px hsl(var(--primary) / 0.5);
+  }
+
+  /* Animated Background */
+  .animated-bg {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--background)) 100%
+    );
+    background-size: 400% 400%;
+    animation: bg-shift 15s ease infinite;
+  }
+
+  /* Section Padding */
+  .section-padding {
+    @apply py-24 md:py-32 px-6;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes gradient-flow {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes bg-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px -5px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/70;
+  }
+}
