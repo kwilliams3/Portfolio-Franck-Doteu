@@ -392,10 +392,6 @@ export function Hero() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2 }}
               >
-                <div className="text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-primary">5+</div>
-                  <div className="text-xs text-muted-foreground">Années d'études</div>
-                </div>
               </motion.div>
             </div>
           </motion.div>
