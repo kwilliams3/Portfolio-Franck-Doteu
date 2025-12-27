@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
 
@@ -82,13 +81,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             transition={{ duration: 0.6 }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-          
-          {/* Category Badge */}
+
           <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
             {project.category}
           </span>
 
-          {/* Overlay Links */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center gap-4 bg-background/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
@@ -99,7 +96,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="p-4 rounded-full bg-primary text-primary-foreground"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -110,7 +107,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-colors"
+                className="p-4 rounded-full bg-card border border-border"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -120,16 +117,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </motion.div>
         </div>
 
-        {/* Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+          <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
             {project.title}
           </h3>
           <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
             {project.description}
           </p>
 
-          {/* Technologies */}
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
               <span
@@ -156,9 +151,32 @@ export function Projects() {
   );
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden bg-secondary/30">
+    <section id="projects" className="relative section-padding overflow-hidden">
+      {/* Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+
+      {/* Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Orbes animés */}
+      <motion.div
+        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]"
+        animate={{ x: [0, 50, 0], y: [0, -40, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-accent/15 rounded-full blur-[140px]"
+        animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       <div className="container mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <div ref={headerRef} className="text-center mb-12">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -167,6 +185,7 @@ export function Projects() {
           >
             Portfolio
           </motion.span>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
@@ -175,6 +194,7 @@ export function Projects() {
           >
             Mes <span className="gradient-text">Projets</span>
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
@@ -185,7 +205,7 @@ export function Projects() {
           </motion.p>
         </div>
 
-        {/* Category Filter */}
+        {/* Filtres */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
@@ -196,10 +216,10 @@ export function Projects() {
             <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                  : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -209,14 +229,12 @@ export function Projects() {
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
 
-        {/* View All Button */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isHeaderInView ? { opacity: 1 } : {}}
@@ -227,7 +245,7 @@ export function Projects() {
             href="https://github.com/kwilliams3"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border hover:border-primary text-foreground font-medium transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border hover:border-primary"
             whileHover={{ scale: 1.05, x: 5 }}
           >
             Voir tous les projets

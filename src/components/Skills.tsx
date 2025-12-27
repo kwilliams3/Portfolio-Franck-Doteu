@@ -1,13 +1,11 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { 
-  Code2, 
-  Database, 
-  Layout, 
-  Server, 
+import {
+  Database,
+  Layout,
+  Server,
   Terminal,
-  GitBranch
+  GitBranch,
 } from "lucide-react";
 
 const skillCategories = [
@@ -67,48 +65,72 @@ const skillCategories = [
   },
 ];
 
-function SkillCard({ category, index }: { category: typeof skillCategories[0]; index: number }) {
+function SkillCard({
+  category,
+  index,
+}: {
+  category: typeof skillCategories[0];
+  index: number;
+}) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 80 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative"
+      transition={{
+        duration: 0.7,
+        delay: index * 0.12,
+        ease: "easeOut",
+      }}
+      className="relative group"
     >
-      <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-xl -z-10"
-        style={{ 
-          backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops))` 
-        }}
+      {/* Halo */}
+      <div
+        className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${category.color} blur-3xl opacity-10`}
       />
+
       <motion.div
-        className="relative h-full p-6 rounded-2xl glass border border-border/50 group-hover:border-primary/30 transition-all duration-500 overflow-hidden"
-        whileHover={{ y: -8, scale: 1.02 }}
+        whileHover={{ y: -10 }}
+        transition={{ type: "spring", stiffness: 180, damping: 14 }}
+        className="relative h-full p-6 rounded-3xl glass border border-border/50 backdrop-blur-xl overflow-hidden"
       >
-        {/* Icon */}
-        <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${category.color} mb-4`}>
+        {/* Icône */}
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className={`inline-flex p-3 rounded-2xl bg-gradient-to-br ${category.color} mb-5`}
+        >
           <category.icon className="w-6 h-6 text-white" />
-        </div>
+        </motion.div>
 
-        {/* Title */}
-        <h3 className="text-xl font-bold mb-4 text-foreground">{category.title}</h3>
+        <h3 className="text-xl font-bold mb-5">
+          {category.title}
+        </h3>
 
-        {/* Skills */}
         <div className="space-y-4">
           {category.skills.map((skill, skillIndex) => (
             <div key={skill.name}>
               <div className="flex justify-between mb-1.5">
-                <span className="text-sm font-medium text-foreground">{skill.name}</span>
-                <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                <span className="text-sm font-medium">
+                  {skill.name}
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  {skill.level}%
+                </span>
               </div>
-              <div className="h-2 bg-secondary rounded-full overflow-hidden">
+
+              <div className="relative h-2 bg-secondary rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={isInView ? { width: `${skill.level}%` } : {}}
-                  transition={{ duration: 1, delay: 0.5 + skillIndex * 0.1, ease: "easeOut" }}
+                  transition={{
+                    duration: 1.3,
+                    delay: 0.5 + skillIndex * 0.12,
+                    ease: "easeOut",
+                  }}
                   className={`h-full rounded-full bg-gradient-to-r ${category.color}`}
                 />
               </div>
@@ -116,8 +138,8 @@ function SkillCard({ category, index }: { category: typeof skillCategories[0]; i
           ))}
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2" />
+        {/* Reflet */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.15),transparent_60%)] pointer-events-none" />
       </motion.div>
     </motion.div>
   );
@@ -128,42 +150,73 @@ export function Skills() {
   const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section id="skills" className="section-padding relative overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.05)_1px,transparent_1px)] bg-[size:80px_80px]" />
+    <section
+      id="skills"
+      className="relative section-padding overflow-hidden"
+    >
+      {/* ===== FOND IDENTIQUE AU HERO ===== */}
 
+      {/* Gradient sombre */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+
+      {/* Motif code */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Orbes animés */}
+      <motion.div
+        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]"
+        animate={{ x: [0, 50, 0], y: [0, -40, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-accent/15 rounded-full blur-[130px]"
+        animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* ===== CONTENU ===== */}
       <div className="container mx-auto relative z-10">
-        {/* Section Header */}
-        <div ref={headerRef} className="text-center mb-16">
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-20">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-            className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
+            className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-5"
           >
-            Expertise
+            Expertise technique
           </motion.span>
+
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-4xl md:text-6xl font-bold mb-6"
           >
             Mes <span className="gradient-text">Compétences</span>
           </motion.h2>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={isHeaderInView ? { opacity: 1 } : {}}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            Technologies et outils que je maîtrise pour créer des applications web et mobiles modernes
+            Technologies et outils que j’utilise pour concevoir
+            des applications modernes et performantes.
           </motion.p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
-            <SkillCard key={category.title} category={category} index={index} />
+            <SkillCard
+              key={category.title}
+              category={category}
+              index={index}
+            />
           ))}
         </div>
       </div>
