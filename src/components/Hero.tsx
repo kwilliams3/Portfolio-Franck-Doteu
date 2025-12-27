@@ -90,10 +90,10 @@ export function Hero() {
     { icon: Code2, label: "GraphQL", color: "from-pink-400 to-pink-600" },
   ];
 
-  // Generate positions for floating particles - left and right sides, avoiding center (photo area)
+  // Generate positions for floating particles - optimized for mobile
   const particlePositions = floatingTechs.map((_, idx) => ({
-    x: idx % 2 === 0 ? 3 + (idx * 5) % 20 : 80 + (idx * 3) % 15,  // Left (0-25%) or Right (80-95%)
-    y: 8 + (idx * 12) % 75,
+    x: idx % 2 === 0 ? 5 + (idx * 4) % 25 : 75 + (idx * 3) % 20, // Adjusted for mobile
+    y: 10 + (idx * 15) % 80, // Adjusted spacing
     delay: idx * 0.4,
     duration: 14 + (idx * 2),
   }));
@@ -108,11 +108,11 @@ export function Hero() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
       }} />
 
-      {/* Floating Tech Particles */}
+      {/* Floating Tech Particles - MODIFIÉ POUR MOBILE */}
       {floatingTechs.map((tech, idx) => (
         <motion.div
           key={tech.label}
-          className="absolute z-20 pointer-events-none hidden sm:block" // Masqué sur mobile
+          className="absolute z-20 pointer-events-none" // ENLEVÉ: hidden sm:block
           style={{
             left: `${particlePositions[idx].x}%`,
             top: `${particlePositions[idx].y}%`,
@@ -121,8 +121,8 @@ export function Hero() {
           animate={{
             opacity: [0.4, 0.9, 0.4],
             scale: [0.9, 1.1, 0.9],
-            x: [0, Math.sin(idx) * 60, -Math.cos(idx) * 40, 0],
-            y: [0, Math.cos(idx) * 50, Math.sin(idx) * 30, 0],
+            x: [0, Math.sin(idx) * 30, -Math.cos(idx) * 20, 0], // Reduced movement for mobile
+            y: [0, Math.cos(idx) * 25, Math.sin(idx) * 15, 0], // Reduced movement for mobile
             rotate: [0, 10, -10, 0],
           }}
           transition={{
@@ -132,9 +132,11 @@ export function Hero() {
             ease: "easeInOut",
           }}
         >
-          <div className={`flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-br ${tech.color} shadow-lg backdrop-blur-sm border border-white/10`}>
-            <tech.icon className="w-4 h-4 text-white" />
-            <span className="text-xs font-bold text-white tracking-wide">{tech.label}</span>
+          <div className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl bg-gradient-to-br ${tech.color} shadow-md sm:shadow-lg backdrop-blur-sm border border-white/10`}>
+            <tech.icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+            <span className="text-xs font-bold text-white tracking-wide hidden xs:inline sm:inline">
+              {tech.label}
+            </span>
           </div>
         </motion.div>
       ))}
@@ -341,14 +343,14 @@ export function Hero() {
                 transition={{ duration: 4, repeat: Infinity }}
               />
               
-              {/* Photo frame - MODIFIÉ POUR CENTRER LES PHOTOS */}
+              {/* Photo frame */}
               <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 border-background shadow-2xl">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={photoIndex}
                     src={profilePhotos[photoIndex]}
                     alt="Franck Doteu - Développeur Full-Stack"
-                    className="w-full h-full object-cover object-center" // MODIFICATION ICI
+                    className="w-full h-full object-cover object-center"
                     initial={{ opacity: 0, scale: 1.1 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
@@ -392,6 +394,10 @@ export function Hero() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2 }}
               >
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-primary">5+</div>
+                  <div className="text-xs text-muted-foreground">Années d'études</div>
+                </div>
               </motion.div>
             </div>
           </motion.div>
