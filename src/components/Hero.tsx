@@ -28,7 +28,7 @@ const codeLines = [
   '  name: "Franck Doteu",',
   "  role: 'Full-Stack Engineer',",
   "  skills: ['React', 'Node.js', 'TypeScript'],",
-  "  passion: 'Building great products'",
+  "  passion: 'Creation des plateforme innovante et performante'",
   "};",
 ];
 
