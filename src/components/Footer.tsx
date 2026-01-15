@@ -32,7 +32,7 @@ export function Footer() {
               Franck Doteu
             </motion.a>
             <p className="text-muted-foreground text-sm flex items-center justify-center md:justify-start gap-1">
-              © 2026 • Fait avec <Heart className="w-4 h-4 text-destructive" /> par Franck Doteu
+              &copy; <?= date('Y') ?>  • Fait avec <Heart className="w-4 h-4 text-destructive" /> par Franck Doteu
             </p>
           </div>
 
