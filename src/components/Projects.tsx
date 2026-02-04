@@ -2,58 +2,92 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
 
+/* =======================
+   Données des projets
+   ======================= */
 const projects = [
   {
-    title: "Portfolio",
-    description: "Mon portfolio personnel présentant mes compétences et réalisations en développement web.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    technologies: ["TypeScript", "React", "Tailwind CSS"],
+    title: "Portfolio Personnel",
+    description:
+      "Portfolio professionnel présentant mes compétences, projets et expériences en développement web.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    technologies: ["TypeScript", "React", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/kwilliams3/Portfolio",
+    demo: "https://portfolio-tan-gamma-65.vercel.app/",
+    category: "Portfolio",
+  },
+  {
+    title: "Gestionnaire d’Impression",
+    description:
+      "Application complète pour la gestion des commandes d’impression, du suivi et des clients.",
+    image:
+      "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&h=600&fit=crop",
+    technologies: ["TypeScript", "React", "Node.js"],
+    github: "https://github.com/kwilliams3/projet-gestinnaire-impression",
     demo: null,
-    category: "Web",
+    category: "Fullstack",
+  },
+  {
+    title: "Dashboard Client – Impression",
+    description:
+      "Tableau de bord client permettant le suivi en temps réel des commandes d’impression.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    technologies: ["TypeScript", "React"],
+    github:
+      "https://github.com/kwilliams3/Dashboard-client-gestion-d-impression",
+    demo: null,
+    category: "Dashboard",
   },
   {
     title: "Pagesse Shoot",
-    description: "Application de capture et gestion de pages web avec fonctionnalités avancées.",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
+    description:
+      "Application web permettant la capture et la gestion de pages web via une interface moderne.",
+    image:
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
     technologies: ["TypeScript", "React"],
     github: "https://github.com/kwilliams3/Pagesse-Shoot",
     demo: null,
     category: "Web",
   },
   {
-    title: "Site Web",
-    description: "Projet de développement d'un site web moderne et responsive.",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
+    title: "Site Web Moderne",
+    description:
+      "Projet de site web moderne et responsive développé avec React et TypeScript.",
+    image:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
     technologies: ["TypeScript", "React"],
     github: "https://github.com/kwilliams3/site-web",
     demo: null,
     category: "Web",
   },
   {
-    title: "Gestionnaire d'Impression",
-    description: "Système de gestion d'impression complet pour la gestion des commandes et des ressources.",
-    image: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&h=600&fit=crop",
-    technologies: ["TypeScript", "React", "Node.js"],
-    github: "https://github.com/kwilliams3/projet-gestinnaire-impression",
+    title: "Portfolio – Ancienne Version",
+    description:
+      "Ancienne version de mon portfolio personnel, utilisée comme base d’évolution.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    technologies: ["TypeScript"],
+    github: "https://github.com/kwilliams3/Portfolio-Franck-Doteu",
     demo: null,
-    category: "Web",
-  },
-  {
-    title: "Dashboard Client Impression",
-    description: "Tableau de bord client pour le suivi et la gestion des commandes d'impression.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    technologies: ["TypeScript", "React", "Dashboard"],
-    github: "https://github.com/kwilliams3/Dashboard-client-gestion-d-impression",
-    demo: null,
-    category: "Web",
+    category: "Portfolio",
   },
 ];
 
-const categories = ["Tous", "Web"];
+const categories = ["Tous", "Portfolio", "Web", "Dashboard", "Fullstack"];
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
-  const ref = useRef(null);
+/* =======================
+   Carte Projet
+   ======================= */
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[0];
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -80,6 +114,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             animate={{ scale: isHovered ? 1.1 : 1 }}
             transition={{ duration: 0.6 }}
           />
+
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
           <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
@@ -102,6 +137,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             >
               <Github className="w-6 h-6" />
             </motion.a>
+
             {project.demo && (
               <motion.a
                 href={project.demo}
@@ -117,10 +153,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </motion.div>
         </div>
 
+        {/* Contenu */}
         <div className="p-6">
           <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
             {project.title}
           </h3>
+
           <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
             {project.description}
           </p>
@@ -141,8 +179,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   );
 }
 
+/* =======================
+   Section Projets
+   ======================= */
 export function Projects() {
-  const headerRef = useRef(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const isHeaderInView = useInView(headerRef, { once: true });
   const [activeCategory, setActiveCategory] = useState("Tous");
 
@@ -152,28 +193,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="relative section-padding overflow-hidden">
-      {/* Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
-
-      {/* Pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Orbes animés */}
-      <motion.div
-        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]"
-        animate={{ x: [0, 50, 0], y: [0, -40, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-accent/15 rounded-full blur-[140px]"
-        animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      />
 
       <div className="container mx-auto relative z-10">
         {/* Header */}
@@ -201,19 +221,14 @@ export function Projects() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            Découvrez mes réalisations récentes en développement web et mobile
+            Une sélection de mes réalisations en développement web et applicatif
           </motion.p>
         </div>
 
         {/* Filtres */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
-          className="flex justify-center gap-3 mb-12 flex-wrap"
-        >
+        <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {categories.map((category) => (
-            <motion.button
+            <button
               key={category}
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
@@ -221,37 +236,35 @@ export function Projects() {
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-secondary-foreground"
               }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               {category}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+            </button>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isHeaderInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <motion.a
+        {/* Grille */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={index}
+            />
+          ))}
+        </div>
+
+        {/* Lien GitHub */}
+        <div className="text-center mt-12">
+          <a
             href="https://github.com/kwilliams3"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border hover:border-primary"
-            whileHover={{ scale: 1.05, x: 5 }}
           >
-            Voir tous les projets
+            Voir tous mes projets
             <ChevronRight className="w-5 h-5" />
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
     </section>
   );
