@@ -6,6 +6,8 @@ import {
   Server,
   Terminal,
   GitBranch,
+  Brain,
+  Cpu,
 } from "lucide-react";
 
 const skillCategories = [
@@ -17,6 +19,7 @@ const skillCategories = [
       { name: "React / Next.js", level: 90 },
       { name: "TypeScript", level: 85 },
       { name: "Tailwind CSS", level: 95 },
+      { name: "Bootstrap", level: 85 },
       { name: "HTML / CSS", level: 90 },
     ],
   },
@@ -26,8 +29,7 @@ const skillCategories = [
     color: "from-green-500 to-emerald-500",
     skills: [
       { name: "Node.js / Express", level: 85 },
-      { name: "Python / Django", level: 75 },
-      { name: "Java / Spring", level: 70 },
+      { name: "PHP / Laravel", level: 80 },
       { name: "API REST", level: 90 },
     ],
   },
@@ -37,9 +39,20 @@ const skillCategories = [
     color: "from-purple-500 to-pink-500",
     skills: [
       { name: "PostgreSQL", level: 85 },
-      { name: "MongoDB", level: 80 },
-      { name: "Supabase", level: 85 },
       { name: "MySQL", level: 80 },
+      { name: "SQL Server", level: 75 },
+    ],
+  },
+  {
+    title: "IA & Machine Learning",
+    icon: Brain,
+    color: "from-indigo-500 to-purple-500",
+    skills: [
+      { name: "Intégration d'IA", level: 90 },
+      { name: "Prompt Engineering", level: 95 },
+      { name: "API OpenAI / Claude", level: 90 },
+      { name: "Agents IA & Automations", level: 85 },
+      { name: "RAG & Vector DB", level: 80 },
     ],
   },
   {
@@ -49,7 +62,6 @@ const skillCategories = [
     skills: [
       { name: "Git", level: 90 },
       { name: "GitHub", level: 90 },
-      { name: "GitLab", level: 75 },
     ],
   },
   {
@@ -60,7 +72,6 @@ const skillCategories = [
       { name: "VS Code", level: 95 },
       { name: "Figma", level: 70 },
       { name: "Postman", level: 85 },
-      { name: "Jira", level: 75 },
     ],
   },
 ];
@@ -100,7 +111,7 @@ function SkillCard({
         {/* Icône */}
         <motion.div
           animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
           className={`inline-flex p-3 rounded-2xl bg-gradient-to-br ${category.color} mb-5`}
         >
           <category.icon className="w-6 h-6 text-white" />
@@ -204,8 +215,8 @@ export function Skills() {
             animate={isHeaderInView ? { opacity: 1 } : {}}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            Technologies et outils que j’utilise pour concevoir
-            des applications modernes et performantes.
+            Technologies et outils que j'utilise pour concevoir
+            des applications modernes, performantes et intelligentes.
           </motion.p>
         </div>
 
