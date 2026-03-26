@@ -7,7 +7,6 @@ import {
   Terminal,
   GitBranch,
   Brain,
-  Cpu,
 } from "lucide-react";
 
 const skillCategories = [
@@ -50,9 +49,8 @@ const skillCategories = [
     skills: [
       { name: "Intégration d'IA", level: 90 },
       { name: "Prompt Engineering", level: 95 },
-      { name: "API OpenAI / Claude", level: 90 },
-      { name: "Agents IA & Automations", level: 85 },
-      { name: "RAG & Vector DB", level: 80 },
+      { name: "Automatisation IA", level: 85 },
+      { name: "Veille & Innovation IA", level: 80 },
     ],
   },
   {
