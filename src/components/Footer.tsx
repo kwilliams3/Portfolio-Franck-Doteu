@@ -7,14 +7,6 @@ const socialLinks = [
   { icon: Mail, href: "mailto:franckdoteu3@gmail.com", label: "Email" },
 ];
 
-const navLinks = [
-  { name: "Accueil", href: "#home" },
-  { name: "Compétences", href: "#skills" },
-  { name: "Projets", href: "#projects" },
-  { name: "Expérience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
-];
-
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -35,20 +27,6 @@ export function Footer() {
               © {currentYear} • Fait avec <Heart className="w-4 h-4 text-destructive" /> par Franck Doteu
             </p>
           </div>
-
-          {/* Navigation */}
-          <nav className="flex flex-wrap justify-center gap-6">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                whileHover={{ y: -2 }}
-              >
-                {link.name}
-              </motion.a>
-            ))}
-          </nav>
 
           {/* Social Links */}
           <div className="flex gap-4">
