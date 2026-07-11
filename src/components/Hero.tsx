@@ -273,7 +273,7 @@ export function Hero() {
               </motion.a>
 
               <motion.a
-                href="https://drive.google.com/file/d/1KxdfVa2KnmFtnfuaNV70WxwbBKY9ehMs/view?usp=drivesdk"
+                href="https://drive.google.com/file/d/17bUoOxVqJfsfkBsffSEcIqhTX7gLVY9d/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-border hover:border-primary/50 font-semibold hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
